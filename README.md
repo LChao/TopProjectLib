@@ -3,10 +3,13 @@
 
 介绍
 --------
-- 提供对花界，养生世界等项目的公用支持
+- 引用两个第三方Android框架类库（https://github.com/openproject/world/ 与 https://github.com/yangfuhai/afinal.git），
+对框架类库进行整合修改而成
+
 
 技术支持
 ------------------------------------
-- Member: 冯建
--   Site: <https://github.com/openproject/world/>
--     QQ: 673592063
+- Member: LChao
+-   Site: <https://github.com/LChao/TopProjectLib.git/>
+-     QQ: 791094913
+
