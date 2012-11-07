@@ -10,6 +10,6 @@
 技术支持
 ------------------------------------
 - Member: LChao
--   Site: <https://github.com/LChao/TopProjectLib.git/>
+-   Site: <https://github.com/LChao/TopProjectLib>
 -     QQ: 791094913
 
