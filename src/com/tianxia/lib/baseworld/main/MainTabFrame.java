@@ -29,12 +29,7 @@ public class MainTabFrame extends ActivityGroup {
     public static int mainTabContainerHeight = 0;
     private Intent mainTabIntent = null;
 
-    String[] tabTexts;
     int tabSize;
-
-    // Tab banner title
-    private LinearLayout mainTabBanner = null;
-    private TextView mainTabTitleTextView = null;
 
     // Tab ImageView
     private List<ImageView> tabImageViews = null;
@@ -44,13 +39,12 @@ public class MainTabFrame extends ActivityGroup {
         setContentView(R.layout.main_tab_frame);
 
         mainTab = (LinearLayout) findViewById(R.id.main_tab);
-        mainTabBanner = (LinearLayout) findViewById(R.id.main_tab_banner);
 
         mainTabContainer = (LinearLayout) findViewById(R.id.main_tab_container);
         mainTabContainer.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
             public void onGlobalLayout() {
                 if (mainTabContainerHeight == 0) {
-                    mainTabContainerHeight = mainTabContainer.getHeight() - mainTabBanner.getHeight();
+                    mainTabContainerHeight = mainTabContainer.getHeight();
                 }
             }
         });
@@ -62,13 +56,11 @@ public class MainTabFrame extends ActivityGroup {
      * init the tab
      * */
     private void initTab() {
-        mainTabTitleTextView = (TextView) findViewById(R.id.main_tab_banner_title);
         mainTab.removeAllViews();
         tabImageViews = new ArrayList<ImageView>();
 
         ImageView tabImageView;
         ImageView splitImageView;
-        tabTexts = getResources().getStringArray(R.array.tab_text);
         LinearLayout.LayoutParams tabLp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 1);
         LinearLayout.LayoutParams splitLp = new LayoutParams(5, LayoutParams.FILL_PARENT);
 
@@ -82,7 +74,6 @@ public class MainTabFrame extends ActivityGroup {
 
                 public void onClick(View v) {
                     int tabIndex = (Integer) (v.getTag());
-                    mainTabTitleTextView.setText(tabTexts[tabIndex]);
                     setContainerView("tab" + tabIndex,
                             ((BaseApplication) getApplication()).getTabActivitys().get(tabIndex));
                     for (int j = 0; j < tabSize; j++) {
@@ -107,8 +98,7 @@ public class MainTabFrame extends ActivityGroup {
             }
         }
 
-        // what's the current focus text and image when first show
-        mainTabTitleTextView.setText(tabTexts[0]);
+        // 设置默认tab页
         tabImageViews.get(0).setImageResource(((BaseApplication) getApplication()).getTabPressImages().get(0));
         tabImageViews.get(0).setBackgroundResource(R.drawable.tab_item_front);
         localActivityManager = getLocalActivityManager();
