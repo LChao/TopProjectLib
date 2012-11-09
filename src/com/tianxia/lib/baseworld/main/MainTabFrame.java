@@ -7,6 +7,7 @@ import android.app.ActivityGroup;
 import android.app.LocalActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,7 +38,6 @@ public class MainTabFrame extends ActivityGroup {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_tab_frame);
-
         mainTab = (LinearLayout) findViewById(R.id.main_tab);
 
         mainTabContainer = (LinearLayout) findViewById(R.id.main_tab_container);
@@ -51,7 +51,7 @@ public class MainTabFrame extends ActivityGroup {
 
         initTab();
     }
-
+    
     /**
      * init the tab
      * */
