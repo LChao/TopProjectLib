@@ -7,7 +7,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SimpleAdapter;
@@ -23,12 +22,12 @@ public abstract class AdapterActivity<T> extends BaseActivity {
     private View mEmptyLoadingView = null;
     private View mEmptyFailView = null;
 
-    protected AbsListView listView;
-    public AbsListView getListView() {
+    protected AdapterView listView;
+    public AdapterView getListView() {
         return listView;
     }
     public void setListView(int resId) {
-        this.listView = (AbsListView) findViewById(resId);
+        this.listView = (AdapterView) findViewById(resId);
     }
 
     protected List<T> listData = new ArrayList<T>();
