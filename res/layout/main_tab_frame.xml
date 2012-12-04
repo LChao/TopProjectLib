@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/tab_bg"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="horizontal" >
     </LinearLayout>
 
