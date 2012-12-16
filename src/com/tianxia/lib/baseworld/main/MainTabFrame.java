@@ -8,6 +8,7 @@ import android.app.LocalActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -157,5 +158,9 @@ public class MainTabFrame extends ActivityGroup {
 		BaseApplication.screenDensity = metric.density;
 		// 屏幕密度DPI（120 /160 / 240）
 		BaseApplication.screenDensityDpi = metric.densityDpi;
+		Log.d("MainTabFrame", "width: " + BaseApplication.screenWidth
+				+ " height: " + BaseApplication.screenHeight + " density: "
+				+ BaseApplication.screenDensity + " densityDpi: "
+				+ BaseApplication.screenDensityDpi);
 	}
 }
