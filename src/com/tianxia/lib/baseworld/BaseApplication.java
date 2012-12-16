@@ -14,63 +14,72 @@ import com.tianxia.lib.baseworld.utils.NetworkUtils;
 
 public abstract class BaseApplication extends Application {
 
-    public static BaseSQLiteHelper mSQLiteHelper;
+	public static BaseSQLiteHelper mSQLiteHelper;
 
-    public static String mAppName;
+	public static String mAppName;
 
-    protected List<Class<?>> mTabActivitys = new ArrayList<Class<?>>();
-    protected static List<Integer> mTabNormalImages = new ArrayList<Integer>();
-    protected static List<Integer> mTabPressImages = new ArrayList<Integer>();
+	protected List<Class<?>> mTabActivitys = new ArrayList<Class<?>>();
+	protected static List<Integer> mTabNormalImages = new ArrayList<Integer>();
+	protected static List<Integer> mTabPressImages = new ArrayList<Integer>();
 
-    public static int mNetWorkState = NetworkUtils.NETWORN_NONE;
+	public static int mNetWorkState = NetworkUtils.NETWORN_NONE;
 
-    public static String mDownloadPath;
-    public static int mVersionCode;
-    public static String mVersionName;
-    public static boolean mShowUpdate = true;
+	public static String mDownloadPath;
+	public static int mVersionCode;
+	public static String mVersionName;
+	public static boolean mShowUpdate = true;
 
-    @Override
-    public void onCreate() {
-        fillTabs();
+	public static int screenHeight;
+	public static int screenWidth;
+	public static float screenDensity;
+	public static int screenDensityDpi;
 
-        initDb();
-        initEnv();
-        initLocalVersion();
-    }
+	@Override
+	public void onCreate() {
+		fillTabs();
 
-    public List<Class<?>> getTabActivitys(){
-        return mTabActivitys;
-    }
+		initDb();
+		initEnv();
+		initLocalVersion();
+	}
 
-    public List<Integer> getTabNormalImages(){
-        return mTabNormalImages;
-    }
-    
-    public List<Integer> getTabPressImages(){
-        return mTabPressImages;
-    }
+	public List<Class<?>> getTabActivitys() {
+		return mTabActivitys;
+	}
 
-    /**
-     * <ul>fill the tab content with:<ul>
-     * <li>tab activitys.</li>
-     * <li>tab normal background resId.</li>
-     * <li>tab press background resId</li>
-     */
-    public abstract void fillTabs();
+	public List<Integer> getTabNormalImages() {
+		return mTabNormalImages;
+	}
 
-    public abstract void initDb();
-    public abstract void initEnv();
+	public List<Integer> getTabPressImages() {
+		return mTabPressImages;
+	}
 
-    public abstract void exitApp(Context context);
+	/**
+	 * <ul>
+	 * fill the tab content with:
+	 * <ul>
+	 * <li>tab activitys.</li>
+	 * <li>tab normal background resId.</li>
+	 * <li>tab press background resId</li>
+	 */
+	public abstract void fillTabs();
 
-    public void initLocalVersion(){
-        PackageInfo pinfo;
-        try {
-            pinfo = this.getPackageManager().getPackageInfo(this.getPackageName(), PackageManager.GET_CONFIGURATIONS);
-            mVersionCode = pinfo.versionCode;
-            mVersionName = pinfo.versionName;
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+	public abstract void initDb();
+
+	public abstract void initEnv();
+
+	public abstract void exitApp(Context context);
+
+	public void initLocalVersion() {
+		PackageInfo pinfo;
+		try {
+			pinfo = this.getPackageManager().getPackageInfo(
+					this.getPackageName(), PackageManager.GET_CONFIGURATIONS);
+			mVersionCode = pinfo.versionCode;
+			mVersionName = pinfo.versionName;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 }

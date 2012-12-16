@@ -7,6 +7,7 @@ import android.app.ActivityGroup;
 import android.app.LocalActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -140,5 +141,21 @@ public class MainTabFrame extends ActivityGroup {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * 获取当前屏幕属性
+	 */
+	public void getScreenProperties() {
+		DisplayMetrics metric = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metric);
+		// 屏幕宽度（像素）
+		BaseApplication.screenWidth = metric.widthPixels;
+		// 屏幕高度（像素）
+		BaseApplication.screenHeight = metric.heightPixels;
+		// 屏幕密度（0.75 / 1.0 /1.5）
+		BaseApplication.screenDensity = metric.density;
+		// 屏幕密度DPI（120 /160 / 240）
+		BaseApplication.screenDensityDpi = metric.densityDpi;
 	}
 }
