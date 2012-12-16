@@ -13,7 +13,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -27,7 +26,7 @@ public class MainTabFrame extends ActivityGroup {
 	private LocalActivityManager localActivityManager = null;
 	private LinearLayout mainTab = null;
 	private LinearLayout mainTabContainer = null;
-	public static int mainTabContainerHeight = 0;
+	// public static int mainTabContainerHeight = 0;
 	private Intent mainTabIntent = null;
 
 	int tabSize;
@@ -38,18 +37,18 @@ public class MainTabFrame extends ActivityGroup {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_tab_frame);
+		getScreenProperties();
 		mainTab = (LinearLayout) findViewById(R.id.main_tab);
-
 		mainTabContainer = (LinearLayout) findViewById(R.id.main_tab_container);
-		mainTabContainer.getViewTreeObserver().addOnGlobalLayoutListener(
-				new OnGlobalLayoutListener() {
-					public void onGlobalLayout() {
-						if (mainTabContainerHeight == 0) {
-							mainTabContainerHeight = mainTabContainer
-									.getHeight();
-						}
-					}
-				});
+		// mainTabContainer.getViewTreeObserver().addOnGlobalLayoutListener(
+		// new OnGlobalLayoutListener() {
+		// public void onGlobalLayout() {
+		// if (mainTabContainerHeight == 0) {
+		// mainTabContainerHeight = mainTabContainer
+		// .getHeight();
+		// }
+		// }
+		// });
 
 		initTab();
 	}
