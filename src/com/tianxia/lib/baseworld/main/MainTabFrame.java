@@ -16,9 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 
 import com.tianxia.lib.baseworld.BaseApplication;
 import com.tianxia.lib.baseworld.R;
+import com.tianxia.lib.baseworld.utils.MoveBg;
 
 public class MainTabFrame extends ActivityGroup {
 
@@ -34,18 +36,23 @@ public class MainTabFrame extends ActivityGroup {
 	// Tab ImageView
 	private List<ImageView> tabImageViews = null;
 
+	private ImageView tabMoveImage;
+	private int startLeft = 0;
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_tab_frame);
 		getScreenProperties();
 		mainTab = (LinearLayout) findViewById(R.id.main_tab);
 		tabMoveImage = (ImageView) findViewById(R.id.main_tab_image_move);
-		DisplayMetrics metric = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(metric);
 		RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(
-				metric.widthPixels / 5, LayoutParams.WRAP_CONTENT);
+				BaseApplication.screenWidth / 5, LayoutParams.WRAP_CONTENT);
 		lpp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		tabMoveImage.setLayoutParams(lpp);
+		if (((BaseApplication) getApplication()).getTabMoveImage() != null) {
+			tabMoveImage.setImageResource(((BaseApplication) getApplication())
+					.getTabMoveImage());
+		}
 		mainTabContainer = (LinearLayout) findViewById(R.id.main_tab_container);
 		// mainTabContainer.getViewTreeObserver().addOnGlobalLayoutListener(
 		// new OnGlobalLayoutListener() {
@@ -69,8 +76,8 @@ public class MainTabFrame extends ActivityGroup {
 
 		ImageView tabImageView;
 		// ImageView splitImageView;
-		LinearLayout.LayoutParams tabLp = new LayoutParams(
-				LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, 1);
+		LinearLayout.LayoutParams tabLp = new LayoutParams(0,
+				LayoutParams.WRAP_CONTENT, 1);
 		// LinearLayout.LayoutParams splitLp = new LayoutParams(5,
 		// LayoutParams.FILL_PARENT);
 

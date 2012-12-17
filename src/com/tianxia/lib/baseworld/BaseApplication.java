@@ -21,6 +21,7 @@ public abstract class BaseApplication extends Application {
 	protected List<Class<?>> mTabActivitys = new ArrayList<Class<?>>();
 	protected static List<Integer> mTabNormalImages = new ArrayList<Integer>();
 	protected static List<Integer> mTabPressImages = new ArrayList<Integer>();
+	protected static Integer mTabMoveImage = null;
 
 	public static int mNetWorkState = NetworkUtils.NETWORN_NONE;
 
@@ -53,6 +54,10 @@ public abstract class BaseApplication extends Application {
 
 	public List<Integer> getTabPressImages() {
 		return mTabPressImages;
+	}
+
+	public Integer getTabMoveImage() {
+		return mTabMoveImage;
 	}
 
 	/**
