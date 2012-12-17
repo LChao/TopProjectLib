@@ -46,7 +46,6 @@ public class MainTabFrame extends ActivityGroup {
 				metric.widthPixels / 5, LayoutParams.WRAP_CONTENT);
 		lpp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		tabMoveImage.setLayoutParams(lpp);
-
 		mainTabContainer = (LinearLayout) findViewById(R.id.main_tab_container);
 		// mainTabContainer.getViewTreeObserver().addOnGlobalLayoutListener(
 		// new OnGlobalLayoutListener() {
