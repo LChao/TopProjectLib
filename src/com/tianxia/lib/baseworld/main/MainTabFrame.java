@@ -7,11 +7,12 @@ import android.app.ActivityGroup;
 import android.app.LocalActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -25,7 +26,7 @@ public class MainTabFrame extends ActivityGroup {
 	private LocalActivityManager localActivityManager = null;
 	private LinearLayout mainTab = null;
 	private LinearLayout mainTabContainer = null;
-	public static int mainTabContainerHeight = 0;
+	// public static int mainTabContainerHeight = 0;
 	private Intent mainTabIntent = null;
 
 	int tabSize;
@@ -36,18 +37,26 @@ public class MainTabFrame extends ActivityGroup {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_tab_frame);
+		getScreenProperties();
 		mainTab = (LinearLayout) findViewById(R.id.main_tab);
+		tabMoveImage = (ImageView) findViewById(R.id.main_tab_image_move);
+		DisplayMetrics metric = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metric);
+		RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(
+				metric.widthPixels / 5, LayoutParams.WRAP_CONTENT);
+		lpp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		tabMoveImage.setLayoutParams(lpp);
 
 		mainTabContainer = (LinearLayout) findViewById(R.id.main_tab_container);
-		mainTabContainer.getViewTreeObserver().addOnGlobalLayoutListener(
-				new OnGlobalLayoutListener() {
-					public void onGlobalLayout() {
-						if (mainTabContainerHeight == 0) {
-							mainTabContainerHeight = mainTabContainer
-									.getHeight();
-						}
-					}
-				});
+		// mainTabContainer.getViewTreeObserver().addOnGlobalLayoutListener(
+		// new OnGlobalLayoutListener() {
+		// public void onGlobalLayout() {
+		// if (mainTabContainerHeight == 0) {
+		// mainTabContainerHeight = mainTabContainer
+		// .getHeight();
+		// }
+		// }
+		// });
 
 		initTab();
 	}
@@ -90,6 +99,9 @@ public class MainTabFrame extends ActivityGroup {
 							((BaseApplication) getApplication())
 									.getTabPressImages().get(tabIndex));
 					// tabImageViews.get(tabIndex).setBackgroundResource(R.drawable.tab_item_front);
+					MoveBg.moveFrontBg(tabMoveImage, startLeft,
+							tabMoveImage.getWidth() * tabIndex, 0, 0);
+					startLeft = tabMoveImage.getWidth() * tabIndex;
 				}
 
 			});
@@ -140,5 +152,25 @@ public class MainTabFrame extends ActivityGroup {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * 获取当前屏幕属性
+	 */
+	public void getScreenProperties() {
+		DisplayMetrics metric = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metric);
+		// 屏幕宽度（像素）
+		BaseApplication.screenWidth = metric.widthPixels;
+		// 屏幕高度（像素）
+		BaseApplication.screenHeight = metric.heightPixels;
+		// 屏幕密度（0.75 / 1.0 /1.5）
+		BaseApplication.screenDensity = metric.density;
+		// 屏幕密度DPI（120 /160 / 240）
+		BaseApplication.screenDensityDpi = metric.densityDpi;
+		Log.d("MainTabFrame", "width: " + BaseApplication.screenWidth
+				+ " height: " + BaseApplication.screenHeight + " density: "
+				+ BaseApplication.screenDensity + " densityDpi: "
+				+ BaseApplication.screenDensityDpi);
 	}
 }

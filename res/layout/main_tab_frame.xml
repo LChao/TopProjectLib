@@ -22,4 +22,10 @@
         android:background="@color/bg" >
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/main_tab_image_move"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
 </RelativeLayout>
