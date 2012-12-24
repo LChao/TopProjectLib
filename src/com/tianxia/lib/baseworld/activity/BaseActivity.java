@@ -1,5 +1,7 @@
 package com.tianxia.lib.baseworld.activity;
 
+import com.baidu.mobstat.StatService;
+
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -13,10 +15,18 @@ public class BaseActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		/**
+		 * 此处调用基本统计代码
+		 */
+		StatService.onResume(this);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
+		/**
+		 * 此处调用基本统计代码
+		 */
+		StatService.onPause(this);
 	}
 }
