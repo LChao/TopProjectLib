@@ -20,10 +20,16 @@ public class NetworkUtils {
         }
 
         //3G
-        state = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
-        if(state == State.CONNECTED||state == State.CONNECTING){
-            return NETWORN_MOBILE;
-        }
+        try {
+        	state = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
+            if(state == State.CONNECTED||state == State.CONNECTING){
+                return NETWORN_MOBILE;
+            }
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+        
         return NETWORN_NONE;
     }
 }
