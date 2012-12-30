@@ -5,7 +5,7 @@
     <string name="app_icon_tip">app_icon</string>
 
     <string name="app_back">返回</string>
-    <string name="app_loading">请稍候，正在努力读取数据....</string>
+    <string name="app_loading">亲,正在努力加载数据...</string>
     <string name="app_loading_none">未找到数据.</string>
     <string name="app_loading_fail">数据加载失败，请稍后再试.</string>
     <string name="app_loading_fail_web">网页加载失败，请稍后再试.</string>
