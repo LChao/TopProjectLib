@@ -38,7 +38,6 @@ public class NetworkUtils {
 				.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 		if (mMobileNetworkInfo != null && mMobileNetworkInfo.isAvailable()
 				&& mMobileNetworkInfo.isConnected()) {
-			Toast.makeText(context, "移动网络链接可用", 0).show();
 			return NETWORN_WIFI;
 		}
 

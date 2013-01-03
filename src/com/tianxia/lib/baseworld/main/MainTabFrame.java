@@ -46,11 +46,11 @@ public class MainTabFrame extends ActivityGroup {
 		mainTab = (LinearLayout) findViewById(R.id.main_tab);
 		tabMoveImage = (ImageView) findViewById(R.id.main_tab_image_move);
 		RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(
-				BaseApplication.screenWidth / 5, LayoutParams.WRAP_CONTENT);
+				BaseApplication.screenWidth / 4, LayoutParams.WRAP_CONTENT);
 		lpp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		tabMoveImage.setLayoutParams(lpp);
 		if (((BaseApplication) getApplication()).getTabMoveImage() != null) {
-			tabMoveImage.setImageResource(((BaseApplication) getApplication())
+			tabMoveImage.setBackgroundResource(((BaseApplication) getApplication())
 					.getTabMoveImage());
 		}
 		mainTabContainer = (LinearLayout) findViewById(R.id.main_tab_container);
@@ -99,11 +99,13 @@ public class MainTabFrame extends ActivityGroup {
 						tabImageViews.get(j).setImageResource(
 								((BaseApplication) getApplication())
 										.getTabNormalImages().get(j));
+						// tabImageViews.get(j).setBackgroundResource(android.R.color.transparent);
 						// tabImageViews.get(j).setBackgroundResource(R.drawable.tab_item_clear);
 					}
 					tabImageViews.get(tabIndex).setImageResource(
 							((BaseApplication) getApplication())
 									.getTabPressImages().get(tabIndex));
+					// tabImageViews.get(tabIndex).setBackgroundResource(R.drawable.tab_item_bg);
 					// tabImageViews.get(tabIndex).setBackgroundResource(R.drawable.tab_item_front);
 					MoveBg.moveFrontBg(tabMoveImage, startLeft,
 							tabMoveImage.getWidth() * tabIndex, 0, 0);
@@ -127,6 +129,7 @@ public class MainTabFrame extends ActivityGroup {
 				.setImageResource(
 						((BaseApplication) getApplication())
 								.getTabPressImages().get(0));
+		// tabImageViews.get(0).setBackgroundResource(R.drawable.tab_item_bg);
 		// tabImageViews.get(0).setBackgroundResource(R.drawable.tab_item_front);
 		localActivityManager = getLocalActivityManager();
 		setContainerView("tab0", ((BaseApplication) getApplication())
