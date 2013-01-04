@@ -5,18 +5,18 @@ import android.view.animation.TranslateAnimation;
 
 public class MoveBg {
 	/**
-	 * �ƶ�����
+	 * 移动方法
 	 * 
 	 * @param v
-	 *            ��Ҫ�ƶ���View
+	 *            需要移动的View
 	 * @param startX
-	 *            ��ʼx���
+	 *            起始x坐标
 	 * @param toX
-	 *            ��ֹx���
+	 *            终止x坐标
 	 * @param startY
-	 *            ��ʼy���
+	 *            起始y坐标
 	 * @param toY
-	 *            ��ֹy���
+	 *            终止y坐标
 	 */
 	public static void moveFrontBg(View v, int startX, int toX, int startY,
 			int toY) {

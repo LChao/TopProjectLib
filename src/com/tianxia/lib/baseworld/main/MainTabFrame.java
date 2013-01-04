@@ -45,9 +45,8 @@ public class MainTabFrame extends ActivityGroup {
 		getScreenProperties();
 		mainTab = (LinearLayout) findViewById(R.id.main_tab);
 		tabMoveImage = (ImageView) findViewById(R.id.main_tab_image_move);
-		RelativeLayout.LayoutParams lpp = new RelativeLayout.LayoutParams(
-				BaseApplication.screenWidth / 4, LayoutParams.WRAP_CONTENT);
-		lpp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		RelativeLayout.LayoutParams lpp=(android.widget.RelativeLayout.LayoutParams) tabMoveImage.getLayoutParams();
+		lpp.width = BaseApplication.screenWidth / 4;
 		tabMoveImage.setLayoutParams(lpp);
 		if (((BaseApplication) getApplication()).getTabMoveImage() != null) {
 			tabMoveImage.setBackgroundResource(((BaseApplication) getApplication())
