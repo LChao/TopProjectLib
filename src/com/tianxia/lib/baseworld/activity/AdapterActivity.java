@@ -14,101 +14,109 @@ import android.widget.SimpleAdapter;
 import com.tianxia.lib.baseworld.utils.EmptyViewUtils;
 
 public abstract class AdapterActivity<T> extends BaseActivity {
-    public static final int TYPE_LISTVIEW = 0;
-    public static final int TYPE_GRIDVIEW = 0;
-    public Adapter adapter;
+	public static final int TYPE_LISTVIEW = 0;
+	public static final int TYPE_GRIDVIEW = 0;
+	public Adapter adapter;
 
-    //for empty view
-    private View mEmptyLoadingView = null;
-    private View mEmptyFailView = null;
+	// for empty view
+	private View mEmptyLoadingView = null;
+	private View mEmptyFailView = null;
 
-    protected AdapterView listView;
-    public AdapterView getListView() {
-        return listView;
-    }
-    public void setListView(int resId) {
-        this.listView = (AdapterView) findViewById(resId);
-    }
+	protected AdapterView listView;
 
-    protected List<T> listData = new ArrayList<T>();
+	public AdapterView getListView() {
+		return listView;
+	}
 
-    /**
-     * setContentView(int resId)
-     * setListView(int resId)
-     */
-    protected abstract void setLayoutView();
+	public void setListView(int resId) {
+		this.listView = (AdapterView) findViewById(resId);
+	}
 
-    /**
-     * the adapter's getView() method
-     * @param position
-     * @param convertView
-     * @return
-     */
-    protected abstract View getView(int position, View convertView);
-    protected boolean isItemEnabled(int position) {
-        return true;
-    }
+	protected List<T> listData = new ArrayList<T>();
 
-    /**
-     * the listView's item click event
-     * @param adapterView
-     * @param view
-     * @param position
-     * @param id
-     */
-    protected abstract void onItemClick(AdapterView<?> adapterView, View view, int position, long id);
+	/**
+	 * setContentView(int resId) setListView(int resId)
+	 */
+	protected abstract void setLayoutView();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setLayoutView();
-        listView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                AdapterActivity.this.onItemClick(adapterView, view, position, id);
-            }
-        });
-    }
+	/**
+	 * the adapter's getView() method
+	 * 
+	 * @param position
+	 * @param convertView
+	 * @return
+	 */
+	protected abstract View getView(int position, View convertView,
+			ViewGroup parent);
 
-    public class Adapter extends SimpleAdapter{
+	protected boolean isItemEnabled(int position) {
+		return true;
+	}
 
-        public Adapter(Context context) {
-            super(context, null, 0, null, null);
-        }
+	/**
+	 * the listView's item click event
+	 * 
+	 * @param adapterView
+	 * @param view
+	 * @param position
+	 * @param id
+	 */
+	protected abstract void onItemClick(AdapterView<?> adapterView, View view,
+			int position, long id);
 
-        @Override
-        public int getCount() {
-            return listData.size();
-        }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setLayoutView();
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view,
+					int position, long id) {
+				AdapterActivity.this.onItemClick(adapterView, view, position,
+						id);
+			}
+		});
+	}
 
-        @Override
-        public boolean isEnabled(int position) {
-            return AdapterActivity.this.isItemEnabled(position);
-        }
+	public class Adapter extends SimpleAdapter {
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            return AdapterActivity.this.getView(position, convertView);
-        }
-    }
+		public Adapter(Context context) {
+			super(context, null, 0, null, null);
+		}
 
-    //show loading view when init and loading data from network
-    protected void showLoadingEmptyView() {
-        if (mEmptyFailView == null) {
-            mEmptyLoadingView = EmptyViewUtils.createLoadingView(this);
-        }
-        ((ViewGroup)listView.getParent()).removeView(mEmptyFailView);
-        ((ViewGroup)listView.getParent()).addView(mEmptyLoadingView);
-        listView.setEmptyView(mEmptyLoadingView);
-    }
+		@Override
+		public int getCount() {
+			return listData.size();
+		}
 
-    //show fail view when loading data fail
-    protected void showFailEmptyView() {
-        if (mEmptyFailView == null) {
-            mEmptyFailView = EmptyViewUtils.createFailView(this);
-        }
-        ((ViewGroup)listView.getParent()).removeView(mEmptyLoadingView);
-        ((ViewGroup)listView.getParent()).addView(mEmptyFailView);
-        listView.setEmptyView(mEmptyFailView);
-    }
+		@Override
+		public boolean isEnabled(int position) {
+			return AdapterActivity.this.isItemEnabled(position);
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			return AdapterActivity.this.getView(position, convertView, parent);
+		}
+	}
+
+	// show loading view when init and loading data from network
+	protected void showLoadingEmptyView() {
+		if (mEmptyFailView == null) {
+			mEmptyLoadingView = EmptyViewUtils.createLoadingView(this);
+		}
+		((ViewGroup) listView.getParent()).removeView(mEmptyFailView);
+		((ViewGroup) listView.getParent()).addView(mEmptyLoadingView);
+		listView.setEmptyView(mEmptyLoadingView);
+	}
+
+	// show fail view when loading data fail
+	protected void showFailEmptyView() {
+		if (mEmptyFailView == null) {
+			mEmptyFailView = EmptyViewUtils.createFailView(this);
+		}
+		((ViewGroup) listView.getParent()).removeView(mEmptyLoadingView);
+		((ViewGroup) listView.getParent()).addView(mEmptyFailView);
+		listView.setEmptyView(mEmptyFailView);
+	}
 }
