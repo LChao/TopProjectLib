@@ -28,7 +28,9 @@ public abstract class BaseApplication extends Application {
 	public static String mDownloadPath;
 	public static int mVersionCode;
 	public static String mVersionName;
-	public static boolean mShowUpdate = true;
+	public static int mLastestVersionCode;
+	public static String mLatestVersionUpdate;
+	// public static boolean mShowUpdate = false;
 
 	public static int screenHeight;
 	public static int screenWidth;
