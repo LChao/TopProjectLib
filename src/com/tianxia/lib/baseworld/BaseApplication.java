@@ -28,7 +28,8 @@ public abstract class BaseApplication extends Application {
 	public static String mDownloadPath;
 	public static int mVersionCode;
 	public static String mVersionName;
-	public static int mLastestVersionCode;
+	public static int mLastestVersionCode = -1;
+	public static String mLastestVersionName;
 	public static String mLatestVersionUpdate;
 	// public static boolean mShowUpdate = false;
 

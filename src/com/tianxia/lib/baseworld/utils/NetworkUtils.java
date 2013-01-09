@@ -24,7 +24,8 @@ public class NetworkUtils {
 		// }
 		NetworkInfo mMobileNetworkInfo = connManager
 				.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-		if (mMobileNetworkInfo != null && mMobileNetworkInfo.isAvailable()) {
+		if (mMobileNetworkInfo != null && mMobileNetworkInfo.isAvailable()
+				&& mMobileNetworkInfo.isConnected()) {
 			return NETWORN_WIFI;
 		}
 
