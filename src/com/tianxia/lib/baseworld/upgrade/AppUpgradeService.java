@@ -61,6 +61,7 @@ public class AppUpgradeService extends Service{
     private DownloadUtils.DownloadListener downloadListener = new DownloadUtils.DownloadListener() {
         @Override
         public void downloading(int progress) {
+        	mNotification.contentView = new RemoteViews(getApplication().getPackageName(), R.layout.app_upgrade_notification);
             mNotification.contentView.setProgressBar(R.id.app_upgrade_progressbar, 100, progress, false);
             mNotification.contentView.setTextViewText(R.id.app_upgrade_progresstext, progress + "%");
             mNotificationManager.notify(mNotificationId, mNotification);
@@ -95,9 +96,10 @@ public class AppUpgradeService extends Service{
             if (destDir.exists()) {
                 File destFile = new File(destDir.getPath() + "/" + URLEncoder.encode(mDownloadUrl));
                 if (destFile.exists() && destFile.isFile() && checkApkFile(destFile.getPath())) {
-                    install(destFile);
-                    stopSelf();
-                    return super.onStartCommand(intent, flags, startId);
+                	destFile.delete();
+                   // install(destFile);
+                   // stopSelf();
+                   // return super.onStartCommand(intent, flags, startId);
                 }
             }
         }else {
@@ -115,7 +117,7 @@ public class AppUpgradeService extends Service{
 
         mPendingIntent = PendingIntent.getActivity(AppUpgradeService.this, R.string.app_name, completingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        mNotification.icon = R.drawable.icon;
+        mNotification.icon = R.drawable.ic_launcher;
         mNotification.tickerText = "开始下载";
         mNotification.contentIntent = mPendingIntent;
         mNotification.contentView.setProgressBar(R.id.app_upgrade_progressbar, 100, 0, false);
@@ -137,7 +139,8 @@ public class AppUpgradeService extends Service{
                 if (destDir.exists() || destDir.mkdirs()) {
                     destFile = new File(destDir.getPath() + "/" + URLEncoder.encode(mDownloadUrl));
                     if (destFile.exists() && destFile.isFile() && checkApkFile(destFile.getPath())) {
-                        install(destFile);
+                    	destFile.delete();
+                        // install(destFile);
                     } else {
                         try {
                             DownloadUtils.download(mDownloadUrl, destFile, false, downloadListener);
