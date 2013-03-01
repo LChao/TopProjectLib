@@ -53,7 +53,7 @@ import org.apache.http.message.BasicNameValuePair;
  * </pre>
  */
 public class RequestParams {
-    private static String ENCODING = "UTF-8";
+    private static String ENCODING = "gbk";
 
     protected ConcurrentHashMap<String, String> urlParams;
     protected ConcurrentHashMap<String, FileWrapper> fileParams;

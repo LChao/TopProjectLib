@@ -1,7 +1,5 @@
 package com.tianxia.lib.baseworld.activity;
 
-import com.baidu.mobstat.StatService;
-
 import android.app.Activity;
 import android.os.Bundle;
 
